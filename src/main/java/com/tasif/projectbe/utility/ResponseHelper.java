@@ -12,11 +12,12 @@ public class ResponseHelper {
 		return response;
 	}
 
-	public static LoginResponse statusResponseInfo(String responseMessage, int responseCode,
+	public static LoginResponse statusResponseInfo(String responseMessage, int responseCode, String token,
 			String userName, String userEmail) {
 		LoginResponse loginResponse = new LoginResponse();
 		loginResponse.setResponseMessage(responseMessage);
 		loginResponse.setResponseCode(responseCode);
+		loginResponse.setToken(token);
 		loginResponse.setUserName(userName);
 		loginResponse.setUserEmail(userEmail);
 		return loginResponse;

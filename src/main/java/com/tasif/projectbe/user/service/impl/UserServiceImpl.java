@@ -12,6 +12,7 @@ import com.tasif.projectbe.user.dto.UserDto;
 import com.tasif.projectbe.user.model.User;
 import com.tasif.projectbe.user.repository.UserRepository;
 import com.tasif.projectbe.user.service.UserService;
+import com.tasif.projectbe.utility.JWTTokenHelper;
 import com.tasif.projectbe.utility.ResponseHelper;
 
 @Service("userService")
@@ -26,6 +27,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private JWTTokenHelper jwtTokenHelper;
+	
 	@Override
 	public Response createUser(UserDto userDto) {
 		User user = modelMapper.map(userDto, User.class);
@@ -47,7 +51,8 @@ public class UserServiceImpl implements UserService {
 		if (!flag) {
 			throw new RuntimeException("Sorry password does not match");
 		}
-		LoginResponse loginResponse = ResponseHelper.statusResponseInfo("Login success", 1000, user.getUserName(), userEmail);
+		String token = jwtTokenHelper.generateToken(user.getUserId());
+		LoginResponse loginResponse = ResponseHelper.statusResponseInfo("Login success", 1000, token, user.getUserName(), userEmail);
 		return loginResponse;
 	}
 

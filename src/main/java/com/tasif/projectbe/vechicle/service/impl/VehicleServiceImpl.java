@@ -23,9 +23,10 @@ public class VehicleServiceImpl implements VehicleService {
 	private VehicleRepository vehicleRepository;
 
 	@Override
-	public Response createVehicle(VehicleDto vehicleDto) {
+	public Response createVehicle(long userId, VehicleDto vehicleDto) {
 		Vehicle vehicle = modelMapper.map(vehicleDto, Vehicle.class);
 		vehicleRepository.save(vehicle);
+		vehicle.setUserId(userId);
 		Response response = ResponseHelper.statusInfo("Vehicle created successfully", 1000);
 		return response;
 	}
@@ -51,8 +52,8 @@ public class VehicleServiceImpl implements VehicleService {
 	}
 
 	@Override
-	public List<Vehicle> getAllVehiclesOfUser() {
-		return vehicleRepository.findAll();
+	public List<Vehicle> getAllVehiclesOfUser(long userId) {
+		return vehicleRepository.findByUserId(userId);
 	}
 
 	@Override

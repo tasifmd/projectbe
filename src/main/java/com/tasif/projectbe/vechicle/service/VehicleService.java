@@ -8,13 +8,13 @@ import com.tasif.projectbe.vechicle.model.Vehicle;
 
 public interface VehicleService {
 
-	public Response createVehicle(VehicleDto vehicleDto);
+	public Response createVehicle(long userId, VehicleDto vehicleDto);
 	
 	public Response updateVehicle(long vehicleId,VehicleDto vehicleDto);
 	
 	public Response deleteVehicle(long vehicleId);
 	
-	public List<Vehicle> getAllVehiclesOfUser();
+	public List<Vehicle> getAllVehiclesOfUser(long userId);
 	
 	public Vehicle getVehicleOfUser(long vehicleId);
 }
