@@ -25,8 +25,8 @@ public class VehicleServiceImpl implements VehicleService {
 	@Override
 	public Response createVehicle(long userId, VehicleDto vehicleDto) {
 		Vehicle vehicle = modelMapper.map(vehicleDto, Vehicle.class);
-		vehicleRepository.save(vehicle);
 		vehicle.setUserId(userId);
+		vehicleRepository.save(vehicle);
 		Response response = ResponseHelper.statusInfo("Vehicle created successfully", 1000);
 		return response;
 	}
